@@ -2,9 +2,11 @@ import express,{ Request, Response } from 'express';
 import path from 'path'; 
 import dotenv from 'dotenv';
 import cors from 'cors'
+import {mongoConnection} from './database/mysql'
 import apiRoutes from './routes/api'
 
 dotenv.config();
+mongoConnection()
 const server = express();
 
 server.use(cors())
