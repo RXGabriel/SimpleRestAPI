@@ -1,7 +1,7 @@
 CRUD para frases
 
-POST /frases - Criar frases novas
-GET /frases - Listar todas as frases
-GET /frases/123 - Pegar informações de uma frase
-PUT /frases/123 - Atualizar informações de uma frase
-DELETE /frases/123 - Deletar uma frase
+POST /frases - Criar frases novas (X)
+GET /frases - Listar todas as frases (X)
+GET /frases/123 - Pegar informações de uma frase ()
+PUT /frases/123 - Atualizar informações de uma frase ()
+DELETE /frases/123 - Deletar uma frase ()
