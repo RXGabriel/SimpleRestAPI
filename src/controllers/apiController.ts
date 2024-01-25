@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+import { Sequelize } from 'sequelize'
 import {Phrase} from '../models/Phrase'
 import {sequelize} from '../instance/mysql'
 
@@ -68,4 +69,18 @@ export const deletePhrase = async (req: Request, res: Response) => {
   let {id} = req.params
   
   await Phrase.destroy({where: {id}})
+}
+
+export const randomPhrase = async (req: Request, res: Response) => {
+  let phrase = await Phrase.findOne({
+    order: [
+      Sequelize.fn('RAND'),
+    ]
+  })
+
+  if(phrase){
+    res.json({phrase})
+  } else{
+    res.json({error: 'Frase sem registro'})
+  }
 }
