@@ -1,25 +1,25 @@
-import {Model, DataTypes} from 'sequelize'
-import {sequelize} from '../database/mysql'
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../instance/mysql';
 
 export interface PhraseAttributes extends Model {
-  id: number
-  author: string
-  txt: string
+  id: number;
+  author: string;
+  txt: string;
 }
 
 export const Phrase = sequelize.define<PhraseAttributes>('Phrase', {
-  id:{
+  id: {
     primaryKey: true,
     autoIncrement: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
   author: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   },
-  txt:{
-    type: DataTypes.STRING
-  }
-},{
+  txt: {
+    type: DataTypes.STRING,
+  },
+}, {
   tableName: 'phrases',
-  timestamps: false
-})
+  timestamps: false,
+});
