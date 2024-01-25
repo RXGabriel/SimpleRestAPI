@@ -62,5 +62,10 @@ export const updatePhrase = async (req: Request, res: Response) => {
   } else{
    res.json({error: 'Frase não encontrada'})
   }
+}
 
+export const deletePhrase = async (req: Request, res: Response) => {
+  let {id} = req.params
+  
+  await Phrase.destroy({where: {id}})
 }
