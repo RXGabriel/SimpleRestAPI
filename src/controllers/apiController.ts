@@ -14,6 +14,6 @@ export const nome = (req: Request, res: Response) => {
   res.json({nome: `Você enviou o nome ${nome}`})
 }
 export const updateFile = async (req: Request, res: Response) => {
-  console.log(req.file)
+  console.log(req.files)
   res.json({})  
 }
