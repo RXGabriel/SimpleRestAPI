@@ -12,6 +12,9 @@ router.get('/ping',ApiController.ping)
 router.get('/random', ApiController.random)
 router.get('/nome/:nome', ApiController.nome)
 
-router.post('/upload',upload.array('avatars',2),ApiController.updateFile)
+router.post('/upload',upload.fields([
+  {name: 'avatar', maxCount: 1},
+  {name: 'gallery',maxCount: 3}
+]),ApiController.updateFile)
 
 export default router 

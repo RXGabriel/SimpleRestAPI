@@ -14,6 +14,14 @@ export const nome = (req: Request, res: Response) => {
   res.json({nome: `Você enviou o nome ${nome}`})
 }
 export const updateFile = async (req: Request, res: Response) => {
-  console.log(req.files)
+  type uploadTypes = {
+    avatar: Express.Multer.File[]
+    gallery: Express.Multer.File[]
+  }
+  const files =  req.files as uploadTypes
+
+  console.log("AVATAR",files.avatar)
+  console.log("GALLERY",files.gallery)
+
   res.json({})  
 }
