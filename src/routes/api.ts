@@ -2,21 +2,19 @@ import { Router } from "express";
 import multer from "multer";
 import * as ApiController from "../controllers/apiController"
 
+const upload = multer({
+  dest: './tmp',
+  fileFilter: (req, file, cb) => {
+    const allowed:string[] = ['image/jpeg','image/jpg','image/png'];
 
-const storageConfig =multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './tmp')
+    console.log("INFORMAÇÔES",file)
+    cb(null, allowed.includes(file.mimetype))
   },
-
-  filename: (req, file, cb) => {
-    let randomName = Math.floor(Math.random() * 1000000)
-    cb(null, `${randomName+Date.now()}.jpg`)
+  limits:{
+    fieldSize: 20000000
   }
 })
 
-const upload = multer({
-  storage: storageConfig
-})
 const router = Router();
 
 router.get('/ping',ApiController.ping)
