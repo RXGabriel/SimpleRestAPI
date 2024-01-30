@@ -1,3 +1,4 @@
+import sharp from 'sharp'
 import {Request, Response} from 'express'
 
 export const ping = (req: Request, res: Response) => {
@@ -14,8 +15,15 @@ export const nome = (req: Request, res: Response) => {
   res.json({nome: `Você enviou o nome ${nome}`})
 }
 export const updateFile = async (req: Request, res: Response) => {
-  console.log('FILE', req.file)
-  console.log('FILES', req.files)
+  if(req.file){
+    await sharp(req.file.path)
+    .resize(300, 300)
+    .toFormat('jpeg')
+    .toFile(`./public/images/${req.file.filename}.jpg`)
 
-  res.json({})
+    res.json({image: `${req.file.filename}.jpg`})
+  }else{
+    res.status(400).json({error: 'Arquivo inválido'})
+  }
 }
+
