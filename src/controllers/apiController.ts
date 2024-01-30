@@ -1,3 +1,4 @@
+import { unlink } from 'fs/promises'
 import sharp from 'sharp'
 import {Request, Response} from 'express'
 
@@ -15,15 +16,21 @@ export const nome = (req: Request, res: Response) => {
   res.json({nome: `Você enviou o nome ${nome}`})
 }
 export const updateFile = async (req: Request, res: Response) => {
-  if(req.file){
-    await sharp(req.file.path)
-    .resize(300, 300)
-    .toFormat('jpeg')
-    .toFile(`./public/images/${req.file.filename}.jpg`)
+  if (req.file) {
+    const filename = `${req.file.filename}.jpg`;
 
-    res.json({image: `${req.file.filename}.jpg`})
-  }else{
-    res.status(400).json({error: 'Arquivo inválido'})
+    await sharp(req.file.path)
+      .resize(300, 300)
+      .toFormat('jpeg')
+      .toFile(`./public/images/${filename}`);
+
+    await unlink(req.file.path); 
+
+    res.json({ image: `${filename}` });
+  } else {
+    res.status(400),
+    res.json({ error: 'File not found' })
   }
-}
+};
+
 
